@@ -16,4 +16,4 @@ Conhecer os componentes da Fluent_ui bem como desempenho no windows, navegaçõe
 
 
 ## Exemplo
-https://github.com/JillyTaboga/mine_field/blob/master/campominado.zip
+https://github.com/JillyTaboga/mine_field/blob/master/mine_field.zip
