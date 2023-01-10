@@ -19,7 +19,6 @@ class FinishDialog extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final mounted = useIsMounted();
     return ContentDialog(
-      backgroundDismiss: false,
       title: Text(status.label),
       content: Text(
           'Restaram ${game.remainingCells.toString()} quadrados dos quais ${game.remainingBombs.toString()} eram bombas'),

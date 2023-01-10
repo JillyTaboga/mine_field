@@ -1,7 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mine_field/interface/screen/navigator_controller.dart';
-import 'package:mine_field/interface/screen/panes/game/game_controller.dart';
+
+import 'navigator_controller.dart';
+import 'panes/game/game_controller.dart';
 
 class HomeScreen extends HookConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,10 +17,17 @@ class HomeScreen extends HookConsumerWidget {
             style: FluentTheme.of(context).typography.title,
           ),
         ),
+        automaticallyImplyLeading: false,
       ),
       pane: NavigationPane(
         selected: currentPaneIndex,
         displayMode: PaneDisplayMode.auto,
+        header: Center(
+          child: Text(
+            'Menu',
+            style: FluentTheme.of(context).typography.subtitle,
+          ),
+        ),
         onChanged: (value) {
           ref.read(navigatorProvider.notifier).state = Panes.values[value];
           if (value != 0) {
@@ -32,16 +40,14 @@ class HomeScreen extends HookConsumerWidget {
           PaneItem(
             icon: const Icon(FluentIcons.game),
             title: const Text('Jogo'),
+            body: Panes.game.child,
           ),
           PaneItem(
             icon: const Icon(FluentIcons.settings),
             title: const Text('Configurações'),
+            body: Panes.settings.child,
           ),
         ],
-      ),
-      content: NavigationBody(
-        index: currentPaneIndex,
-        children: Panes.values.map((e) => e.child).toList(),
       ),
     );
   }

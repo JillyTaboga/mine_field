@@ -2,7 +2,8 @@ import 'dart:ui';
 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mine_field/interface/screen/home_screen.dart';
+
+import 'interface/screen/home_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FluentApp(
+      debugShowCheckedModeBanner: false,
       scrollBehavior: const FluentScrollBehavior().copyWith(
         dragDevices: {
           PointerDeviceKind.mouse,
