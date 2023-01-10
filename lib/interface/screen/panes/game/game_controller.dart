@@ -2,8 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mine_field/domain/entities/game_entity.dart';
-import 'package:mine_field/interface/screen/panes/settings/settings_controller.dart';
+
+import '../../../../domain/entities/game_entity.dart';
+import '../settings/settings_controller.dart';
 
 final gameProvider = StateNotifierProvider<GameNotifier, GameEntity>((ref) {
   final dificult = ref.watch(dificultProvider);
@@ -92,12 +93,14 @@ class GameNotifier extends StateNotifier<GameEntity> {
         );
       }
     }
-    state = GameEntity(cells: cells);
+    state = GameEntity(
+      cells: cells,
+    );
   }
 
   newGame() {
-    _generateGame();
     ref.read(gameStatusProvider.notifier).state = GameStatus.running;
+    _generateGame();
     ref.read(timeProvider.notifier).resetClock();
   }
 

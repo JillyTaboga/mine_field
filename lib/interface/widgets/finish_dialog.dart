@@ -1,8 +1,11 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:mine_field/domain/entities/game_entity.dart';
-import 'package:mine_field/interface/screen/panes/game/game_controller.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class FinishDialog extends StatelessWidget {
+import '../../domain/entities/game_entity.dart';
+import '../screen/panes/game/game_controller.dart';
+
+class FinishDialog extends HookConsumerWidget {
   const FinishDialog({
     Key? key,
     required this.status,
@@ -13,7 +16,8 @@ class FinishDialog extends StatelessWidget {
   final GameEntity game;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final mounted = useIsMounted();
     return ContentDialog(
       backgroundDismiss: false,
       title: Text(status.label),
@@ -22,8 +26,10 @@ class FinishDialog extends StatelessWidget {
       actions: [
         Button(
             child: const Text('Novo jogo'),
-            onPressed: () {
-              Navigator.pop(context, true);
+            onPressed: () async {
+              await ref.read(gameProvider.notifier).newGame();
+              // ignore: use_build_context_synchronously
+              if (mounted()) Navigator.pop(context, true);
             })
       ],
     );
